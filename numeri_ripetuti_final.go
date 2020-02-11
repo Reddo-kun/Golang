@@ -1,8 +1,11 @@
 package main
 
 import (
+	"bufio"
 	"fmt"
 	"os"
+	"strconv"
+	"unicode"
 )
 
 func main() {
@@ -33,24 +36,30 @@ func control(intSlice []int) int {
 
 func inserimento() {
 	var list []int
-	var v int
-	fmt.Println("inserisci i numeri")
+	var line string
+
 	for {
-		fmt.Scan(&v)
-
-		if v == 0 {
-			os.Exit(0)
-		} else if v == 99 {
-			break
-		} else {
-			list = append(list, v)
+		fmt.Println("inserisci i numeri")
+		scanner := bufio.NewScanner(os.Stdin)
+		if scanner.Scan() {
+			line = scanner.Text()
 		}
+		for _, valore := range line {
+			if unicode.IsNumber(valore) {
+				value := string(valore)
+				val, _ := strconv.Atoi(value)
+				if val == 0 {
+					os.Exit(0)
+				}
+				list = append(list, val)
 
+			}
+
+		}
+		stampa(list)
+		list = nil
 	}
 
-	stampa(list)
-
-	list = nil
 }
 func stampa(lista []int) {
 	valore := control(lista)
