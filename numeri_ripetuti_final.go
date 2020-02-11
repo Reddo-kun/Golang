@@ -46,8 +46,9 @@ func inserimento() {
 		}
 		for _, valore := range line {
 			if unicode.IsNumber(valore) {
-				value := string(valore)
-				val, _ := strconv.Atoi(value)
+				/*value := string(valore)
+				val, _ := strconv.Atoi(value)*/
+				val, _ := strconv.Atoi(string(valore))
 				if val == 0 {
 					os.Exit(0)
 				}
