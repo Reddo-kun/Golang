@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"os"
 	"strconv"
-	"unicode"
+	"strings"
 )
 
 func main() {
@@ -44,17 +44,14 @@ func inserimento() {
 		if scanner.Scan() {
 			line = scanner.Text()
 		}
-		for _, valore := range line {
-			if unicode.IsNumber(valore) {
-				/*value := string(valore)
-				val, _ := strconv.Atoi(value)*/
-				val, _ := strconv.Atoi(string(valore))
-				if val == 0 {
-					os.Exit(0)
-				}
-				list = append(list, val)
+		result := strings.Split(line, " ")
+		for _, valore := range result {
 
+			val, _ := strconv.Atoi(string(valore))
+			if val == 0 {
+				os.Exit(0)
 			}
+			list = append(list, val)
 
 		}
 		stampa(list)
